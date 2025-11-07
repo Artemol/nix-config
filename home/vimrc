@@ -1,0 +1,180 @@
+" ユーザ定義
+set nocompatible
+filetype plugin on
+"noremap <Up> <Nop>
+"noremap <Down> <Nop>
+"noremap <Left> <Nop>
+"noremap <Right> <Nop>
+
+nnoremap <Down> gj
+nnoremap <Up> gk
+inoremap <Down> <C-o>gj
+inoremap <Up> <C-o>gk
+
+" helpの言語設定
+set helplang=ja,en
+
+" エンコーディング
+set fenc=utf-8
+
+" ファイルを上書きする前にバックアップを作ることを無効化
+set nowritebackup
+" ファイルを上書きする前にバックアップを作ることを無効化
+set nobackup
+" スワップファイルを作成しない
+set noswapfile
+" 編集中のファイルが変更されたら自動で読み直す
+set autoread
+" vim の矩形選択で文字が無くても右へ進める
+set virtualedit=block
+" 挿入モードでバックスペースで削除できるようにする
+set backspace=indent,eol,start
+" 全角文字専用の設定
+set ambiwidth=double
+" wildmenuオプションを有効(vimバーからファイルを選択できる)
+set wildmenu
+" ビープ音を可視化
+set visualbell
+" コマンドラインの補完
+set wildmode=list:longest
+" 折り返し時に表示行単位での移動できるようにする
+nnoremap j gj
+nnoremap k gk
+
+
+"----------------------------------------
+" 検索
+"----------------------------------------
+" 検索するときに大文字小文字を区別しない
+set ignorecase
+" 小文字で検索すると大文字と小文字を無視して検索
+set smartcase
+" 検索がファイル末尾まで進んだら、ファイル先頭から再び検索
+set wrapscan
+" インクリメンタル検索 (検索ワードの最初の文字を入力した時点で検索が開始)
+set incsearch
+" 検索結果をハイライト表示
+set hlsearch
+" ESC連打でハイライト解除
+nmap <Esc><Esc> :nohlsearch<CR><Esc>
+
+
+"----------------------------------------
+" 表示設定
+"----------------------------------------
+" エラーメッセージの表示時にビープを鳴らさない
+set noerrorbells
+" Windowsでパスの区切り文字をスラッシュで扱う
+set shellslash
+" 対応する括弧やブレースを表示
+set showmatch matchtime=1
+" メッセージ表示欄を2行確保
+set cmdheight=2
+" ステータス行を常に表示
+set laststatus=2
+" ウィンドウの右下にまだ実行していない入力中のコマンドを表示
+set showcmd
+" 省略されずに表示
+set display=lastline
+" タブ文字を CTRL-I で表示し、行末に $ で表示する
+set list
+" 行末のスペースを可視化
+set listchars=tab:^\ ,trail:~
+" コマンドラインの履歴を10000件保存する
+set history=10000
+" コメントの色を水色
+hi Comment ctermfg=3
+" 入力モードでTabキー押下時に半角スペースを挿入
+set expandtab
+" インデント幅
+set shiftwidth=2
+" タブキー押下時に挿入される文字幅を指定
+set softtabstop=2
+" ファイル内にあるタブ文字の表示幅
+set tabstop=2
+" ツールバーを非表示にする
+set guioptions-=T
+" yでコピーした時にクリップボードに入る
+set guioptions+=a
+" メニューバーを非表示にする
+set guioptions-=m
+" 右スクロールバーを非表示
+set guioptions+=R
+" 改行時に入力された行の末尾に合わせて次の行のインデントを増減する
+set smartindent
+" 検索にマッチした行以外を折りたたむ(フォールドする)機能
+set nofoldenable
+" タイトルを表示
+set title
+" 行番号の表示
+set number
+" ヤンクでクリップボードにコピー
+set clipboard=unnamed,autoselect
+" Escの2回押しでハイライト消去
+nnoremap <Esc><Esc> :nohlsearch<CR><ESC>
+" シンタックスハイライト
+syntax on
+" すべての数を10進数として扱う
+set nrformats=
+" 行をまたいで移動
+set whichwrap=b,s,h,l,<,>,[,],~
+" バッファスクロール
+set mouse=a
+
+" auto reload .vimrc
+augroup source-vimrc
+  autocmd!
+  autocmd BufWritePost *vimrc source $MYVIMRC | set foldmethod=marker
+  autocmd BufWritePost *gvimrc if has('gui_running') source $MYGVIMRC
+augroup END
+
+
+
+" Trigger a highlight in the appropriate direction when pressing these keys:
+let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+
+highlight QuickScopePrimary guifg='#afff5f' gui=underline ctermfg=155 cterm=underline
+highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=underline
+
+set guifont=HackGen_Console_NF:h11:cANSI:qDRAFT
+
+" 入力キーの辞書
+let s:compl_key_dict = {
+      \ char2nr("\<C-l>"): "\<C-x>\<C-l>",
+      \ char2nr("\<C-n>"): "\<C-x>\<C-n>",
+      \ char2nr("\<C-p>"): "\<C-x>\<C-p>",
+      \ char2nr("\<C-k>"): "\<C-x>\<C-k>",
+      \ char2nr("\<C-t>"): "\<C-x>\<C-t>",
+      \ char2nr("\<C-i>"): "\<C-x>\<C-i>",
+      \ char2nr("\<C-]>"): "\<C-x>\<C-]>",
+      \ char2nr("\<C-f>"): "\<C-x>\<C-f>",
+      \ char2nr("\<C-d>"): "\<C-x>\<C-d>",
+      \ char2nr("\<C-v>"): "\<C-x>\<C-v>",
+      \ char2nr("\<C-u>"): "\<C-x>\<C-u>",
+      \ char2nr("\<C-o>"): "\<C-x>\<C-o>",
+      \ char2nr('s'): "\<C-x>s",
+      \ char2nr("\<C-s>"): "\<C-x>s"
+      \}
+" 表示メッセージ
+let s:hint_i_ctrl_x_msg = join([
+      \ '<C-l>: While lines',
+      \ '<C-n>: keywords in the current file',
+      \ "<C-k>: keywords in 'dictionary'",
+      \ "<C-t>: keywords in 'thesaurus'",
+      \ '<C-i>: keywords in the current and included files',
+      \ '<C-]>: tags',
+      \ '<C-f>: file names',
+      \ '<C-d>: definitions or macros',
+      \ '<C-v>: Vim command-line',
+      \ "<C-u>: User defined completion ('completefunc')",
+      \ "<C-o>: omni completion ('omnifunc')",
+      \ "s: Spelling suggestions ('spell')"
+      \], "\n")
+function! s:hint_i_ctrl_x() abort
+  echo s:hint_i_ctrl_x_msg
+  let c = getchar()
+  return get(s:compl_key_dict, c, nr2char(c))
+endfunction
+ 
+inoremap <expr> <C-x>  <SID>hint_i_ctrl_x()
+

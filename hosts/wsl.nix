@@ -8,11 +8,6 @@
 { config, lib, pkgs, ... }:
 
 {
-  # imports = [
-    # include NixOS-WSL modules
-    # <nixos-wsl/modules>
-  # ];
-
   wsl.enable = true;
   wsl.defaultUser = "artemol";
 
@@ -21,16 +16,9 @@
     extraGroups = [ "wheel" ];
   };
 
-  home-manager.users.artemol = { pkgs, ... }: {
-    home.stateVersion = "25.05";
-
-    programs.git.enable = true;
-
-    home.packages = with pkgs; [
-      vim
-    ];
-
-    programs.neovim.enable = true;
+  home-manager.users.artemol = {
+    # imports = [ "${myHome}/artemol.nix" ];
+    imports = [ ../home/artemol.nix ];
   };
 
   # This value determines the NixOS release from which the default

@@ -8,6 +8,9 @@
     # home-manager を追加。nixpkgs は flake で同じものを使わせる
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    
+    # myHome.url = "path:./home";
+    # myHome.flake = false;
   };
 
   outputs = { self, nixpkgs, nixos-wsl, home-manager, ... }: {
@@ -19,6 +22,7 @@
           home-manager.nixosModules.home-manager
           ./hosts/wsl.nix
         ];
+        # specialArgs = { inherit myHome; };
       };
     };
   };
