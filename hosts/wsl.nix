@@ -8,13 +8,30 @@
 { config, lib, pkgs, ... }:
 
 {
-  imports = [
+  # imports = [
     # include NixOS-WSL modules
-    <nixos-wsl/modules>
-  ];
+    # <nixos-wsl/modules>
+  # ];
 
   wsl.enable = true;
   wsl.defaultUser = "artemol";
+
+  users.users.artemol = {
+    isNormalUser = true;
+    extraGroups = [ "wheel" ];
+  };
+
+  home-manager.users.artemol = { pkgs, ... }: {
+    home.stateVersion = "25.05";
+
+    programs.git.enable = true;
+
+    home.packages = with pkgs; [
+      vim
+    ];
+
+    programs.neovim.enable = true;
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
