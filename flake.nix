@@ -1,19 +1,17 @@
 {
-  description = "NixOS-WSL flake config";
+  description = "My Nix flake config";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
 
-    # home-manager を追加。nixpkgs は flake で同じものを使わせる
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    
-    # myHome.url = "path:./home";
-    # myHome.flake = false;
   };
 
-  outputs = { self, nixpkgs, nixos-wsl, home-manager, ... }: {
+  outputs = { self, nixpkgs, nixos-wsl, home-manager, nix-darwin, ... }: 
+  {
+    # NixOS configurations
     nixosConfigurations = {
       wsl = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -22,7 +20,21 @@
           home-manager.nixosModules.home-manager
           ./hosts/wsl.nix
         ];
-        # specialArgs = { inherit myHome; };
+      };
+    };
+
+    # non-NixOS configurations
+    homeConfigurations = {
+      # Apple Silicon MacBook Pro
+      darwin = home-manager.lib.homeManagerConfiguration {
+        pkgs = import nixpkgs { system = "aarch64-darwin"; };
+        modules = [ ./home/common.nix ./home/darwin.nix ];
+      };
+
+      # x86_64 Linux laptop
+      linux = home-manager.lib.homeManagerConfiguration {
+        pkgs = import nixpkgs { system = "x86_64-linux"; };
+        modules = [ ./home/common.nix ./home/linux.nix ];
       };
     };
   };

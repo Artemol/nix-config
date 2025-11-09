@@ -1,11 +1,13 @@
 { config, pkgs, ... }:
 
-{
+let
+  isDarwin = pkgs.stdenv.isDarwin;
+  isLinux = pkgs.stdenv.isLinux;
+in {
   home.stateVersion = "25.05";
 
   home.sessionVariables = {
     NIXCFG = "${config.home.homeDirectory}/nix-config";
-    HM_HOST = "wsl";
   };
 
   programs.git = {
@@ -53,17 +55,18 @@
     shellAliases = {
       ll = "ls -l";
       ".." = "cd ..";
-      nupdate = ''git -C "$NIXCFG" add -A && sudo nixos-rebuild switch --flake "$NIXCFG#$HM_HOST"'';
-      nupdate-i = ''git -C "$NIXCFG" add -A && sudo nixos-rebuild switch --flake "$NIXCFG#$HM_HOST" --impure'';
-      cdn = ''cd "$NIXCFG"'';
     };
   };
 
-  programs.go = { enable = true; };
-  programs.uv = { enable = true; };
+  programs.starship = {
+    enable = true;
+  };
+
+  # programs.go = { enable = true; };
+  # programs.uv = { enable = true; };
 
   # 追加のパッケージがあれば
-  home.packages = with pkgs; [ 
-    curl tree wget htop
-  ];
+  # home.packages = with pkgs; [ 
+    # curl tree wget htop
+  # ];
 }

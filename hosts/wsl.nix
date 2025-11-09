@@ -17,8 +17,10 @@
   };
 
   home-manager.users.artemol = {
-    # imports = [ "${myHome}/artemol.nix" ];
-    imports = [ ../home/artemol.nix ];
+    imports = [ 
+      ../home/common.nix
+      ../home/nixos.nix
+   ];
   };
 
   # This value determines the NixOS release from which the default

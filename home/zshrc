@@ -1,0 +1,45 @@
+autoload -Uz compinit
+compinit
+
+. "$HOME/.local/bin/env"
+
+PATH="$PATH:/Applications/WezTerm.app/Contents/MacOS"
+export PATH
+
+eval "$(starship init zsh)"
+
+alias v="vim"
+alias nv="nvim"
+alias lg="lazygit"
+alias cd="z"
+
+eval "$(zoxide init zsh)"
+
+function _fzf_cd_ghq() {
+    FZF_DEFAULT_OPTS="${FZF_DEFAULT_OPTS} --reverse --height=50%"
+    local root="$(ghq root)"
+    local repo="$(ghq list | fzf --preview="ls -AF --color=always ${root}/{1}")"
+    local dir="${root}/${repo}"
+    [ -n "${dir}" ] && cd "${dir}"
+    zle accept-line
+    zle reset-prompt
+}
+
+zle -N _fzf_cd_ghq
+bindkey "^g" _fzf_cd_ghq
+
+export HOMEBREW_NO_ENV_HINTS=1
+
+alias ls="lsd"
+alias ll="ls -l"
+alias la="ls -al"
+alias br="brew"
+
+eval "$(uv generate-shell-completion zsh)"
+function ur() {
+  uv run $1
+}
+eval "$(mise activate zsh)"
+
+export PATH="$PATH:$HOME/go/bin/"
+alias ttt="todotxt-tui"
