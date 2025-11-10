@@ -53,20 +53,70 @@ in {
       enable = true;
     };
     shellAliases = {
-      ll = "ls -l";
       ".." = "cd ..";
+      v = "vim";
+      nv = "nvim";
+      cd = "z";
     };
   };
 
   programs.starship = {
     enable = true;
+    settings = {
+      add_newline = true;
+      username = {
+        style_user = "white bold";
+        style_root = "black bold";
+        format = "[$user]($style)";
+        disabled = false;
+        show_always = true;
+      };
+      hostname = {
+        ssh_only = false;
+        format = "@[$hostname](white bold)[$ssh_symbol](bold blue) ";
+        disabled = false;
+      };
+    };
+    enableZshIntegration = true;
   };
 
-  # programs.go = { enable = true; };
-  # programs.uv = { enable = true; };
+  programs.lazygit = {
+    enable = true;
+    settings = {
+      git.pagers.externalDiffCommand = "difft --color=always";
+    };
+  };
+
+  programs.zoxide = {
+    enable = true;
+    enableZshIntegration = true;
+  };
+
+  programs.mise = {
+    enable = true;
+    enableZshIntegration = true;
+    globalConfig = {
+      tools = {
+        bun = "latest";
+        node = "22";
+        python = "latest";
+      };
+    };
+  };
+
+  programs.lsd = {
+    enable = true;
+    enableZshIntegration = true;
+  };
+
+  programs.difftastic.enable = true;
+  programs.fzf.enable = true;
+  programs.ripgrep.enable = true;
+  programs.go.enable = true;
+  programs.uv.enable = true;
 
   # 追加のパッケージがあれば
-  # home.packages = with pkgs; [ 
-    # curl tree wget htop
-  # ];
+  home.packages = with pkgs; [ 
+    curl tree wget htop ghq
+  ];
 }
