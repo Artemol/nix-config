@@ -1,6 +1,9 @@
 { config, pkgs, ... }:
 
 {
+  home.username = "artemol";
+  home.homeDirectory = "/home/artemol";
+
   home.sessionVariables = {
     HM_HOST = "linux";
   };
