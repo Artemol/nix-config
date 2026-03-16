@@ -20,11 +20,6 @@ in {
       init = {
         defaultBranch = "main";
       };
-      url = {
-        "git@github.com:" = {
-          insteadOf = "https://github.com";
-        };
-      };
       push = {
         autoSetupRemote = true;
       };
@@ -99,7 +94,9 @@ in {
       tools = {
         bun = "latest";
         node = "22";
-        python = "latest";
+      };
+      settings = {
+        idiomatic_version_file_enable_tools = [];
       };
     };
   };
@@ -115,8 +112,8 @@ in {
   programs.go.enable = true;
   programs.uv.enable = true;
 
-  # 追加のパッケージがあれば
+  # 追加のパッケージがあればー
   home.packages = with pkgs; [ 
-    curl tree wget htop ghq
+    curl tree wget htop ghq devenv
   ];
 }

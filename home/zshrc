@@ -25,3 +25,4 @@ alias br="brew"
 eval "$(uv generate-shell-completion zsh)"
 
 export PATH="$PATH:$HOME/go/bin/"
+
