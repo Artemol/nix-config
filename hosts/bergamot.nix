@@ -10,8 +10,21 @@
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  services.nix-daemon.enable = true;
   programs.zsh.enable = true;
+
+  homebrew = {
+    enable = true;
+
+    onActivation = {
+      autoUpdate = true;
+      upgrade = true;
+    };
+
+    casks = [
+      "arc"
+      "visual-studio-code"
+    ];
+  };
 
   system.primaryUser = "toku163";
   system.stateVersion = 6;

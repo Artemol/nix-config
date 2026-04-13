@@ -10,7 +10,6 @@
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  services.nix-daemon.enable = true;
   programs.zsh.enable = true;
 
   system.primaryUser = "toku163";
