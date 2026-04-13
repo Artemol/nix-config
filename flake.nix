@@ -17,7 +17,11 @@
   };
 
   outputs = { self, nixpkgs, nixos-wsl, home-manager, home-manager-darwin, nix-darwin, ... }:
-  {
+  let
+    mkDarwinHost = import ./lib/mkDarwinHost.nix {
+      inherit self nix-darwin home-manager-darwin;
+    };
+  in {
     # NixOS configurations
     nixosConfigurations = {
       wsl = nixpkgs.lib.nixosSystem {
@@ -31,40 +35,14 @@
     };
 
     darwinConfigurations = {
-      suika = nix-darwin.lib.darwinSystem {
-        system = "aarch64-darwin";
-        modules = [
-          ./hosts/suika.nix
-          home-manager-darwin.darwinModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.toku163.imports = [
-              ./home/common.nix
-              ./home/suika.nix
-            ];
-
-            system.configurationRevision = self.rev or self.dirtyRev or null;
-          }
-        ];
+      suika = mkDarwinHost {
+        hostName = "suika";
+        hostModules = [ ./hosts/suika.nix ];
       };
 
-      bergamot = nix-darwin.lib.darwinSystem {
-        system = "aarch64-darwin";
-        modules = [
-          ./hosts/bergamot.nix
-          home-manager-darwin.darwinModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.toku163.imports = [
-              ./home/common.nix
-              ./home/bergamot.nix
-            ];
-
-            system.configurationRevision = self.rev or self.dirtyRev or null;
-          }
-        ];
+      bergamot = mkDarwinHost {
+        hostName = "bergamot";
+        hostModules = [ ./hosts/bergamot.nix ];
       };
     };
 

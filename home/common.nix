@@ -26,6 +26,12 @@ in {
     };
   };
 
+  programs.wezterm = {
+    enable = true;
+    enableZshIntegration = true;
+    extraConfig = builtins.readFile ./wezterm/wezterm.lua;
+  };
+
   programs.vim = {
     enable = true;
     extraConfig = builtins.readFile ./vimrc;
