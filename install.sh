@@ -1,9 +1,14 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-HM_HOST="${1:-linux}"               # homeConfigurations name
+OS_NAME="$(uname -s)"
+DEFAULT_HOST="linux"
+if [ "$OS_NAME" = "Darwin" ]; then
+  DEFAULT_HOST="$(scutil --get LocalHostName 2>/dev/null || hostname -s)"
+fi
+
+HM_HOST="${1:-$DEFAULT_HOST}"       # flake host name
 NIXCFG="${NIXCFG:-$HOME/nix-config}"
-ZSH_PATH="$HOME/.nix-profile/bin/zsh"
 SHELLS_FILE="/etc/shells"
 
 echo "[*] Using flake: $NIXCFG#$HM_HOST"
@@ -18,9 +23,16 @@ if ! command -v nix >/dev/null 2>&1; then
   exit 0
 fi
 
-# 2) Apply Home Manager config from flake
-echo "[*] Applying Home Manager config..."
-nix run home-manager/master -- switch --flake "$NIXCFG#$HM_HOST"
+# 2) Apply config from flake
+if [ "$OS_NAME" = "Darwin" ]; then
+  ZSH_PATH="/run/current-system/sw/bin/zsh"
+  echo "[*] Applying nix-darwin config..."
+  nix run nix-darwin/master#darwin-rebuild -- switch --flake "$NIXCFG#$HM_HOST"
+else
+  ZSH_PATH="$HOME/.nix-profile/bin/zsh"
+  echo "[*] Applying Home Manager config..."
+  nix run home-manager/master -- switch --flake "$NIXCFG#$HM_HOST"
+fi
 
 # 3) Make Nix zsh a valid login shell and chsh
 echo "[*] Setting up zsh as login shell (if available)..."

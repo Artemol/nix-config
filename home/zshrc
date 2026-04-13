@@ -4,6 +4,7 @@ compinit
 . "$HOME/.local/bin/env"
 
 export PATH="$PATH:/Applications/WezTerm.app/Contents/MacOS"
+export PATH="/Applications/MacVim.app/Contents/bin:$PATH"
 
 function _fzf_cd_ghq() {
     FZF_DEFAULT_OPTS="${FZF_DEFAULT_OPTS} --reverse --height=50%"
