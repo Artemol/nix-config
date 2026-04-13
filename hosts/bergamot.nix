@@ -12,6 +12,22 @@
 
   programs.zsh.enable = true;
 
+  # nix-darwinによるMacOSの設定
+  system = {
+    defaults = {
+      NSGlobalDomain.AppleShowAllExtensions = true;
+      finder = {
+        AppleShowAllFiles = true;
+        AppleShowAllExtensions = true;
+      };
+      dock = {
+        autohide = true;
+        show-recents = false;
+      };
+    };
+  };
+
+  # brewでインストールするアプリケーションの設定
   homebrew = {
     enable = true;
 
