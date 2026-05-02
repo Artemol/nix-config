@@ -17,6 +17,7 @@
     # brews and casks to be installed
     brews = [
       "colima"
+      "docker"
       "docker-compose"
       "typst"
     ];
@@ -38,6 +39,17 @@
       "unity-hub"
       "zotero"
       "jordanbaird-ice"
+      "obsidian"
+      "slack"
+      "discord"
+      "macvim-app"
+      "notion"
+      "microsoft-office"
+      "microsoft-teams"
+      "scroll-reverser"
+      "codex-app"
+      "google-drive"
+      "cyberduck"
     ];
   };
 }

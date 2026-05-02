@@ -29,8 +29,9 @@ in {
   programs.wezterm = {
     enable = true;
     enableZshIntegration = true;
-    extraConfig = builtins.readFile ./wezterm/wezterm.lua;
   };
+
+  home.file.".config/wezterm".source = ./wezterm;
 
   programs.vim = {
     enable = true;
@@ -58,6 +59,8 @@ in {
       v = "vim";
       nv = "nvim";
       cd = "z";
+      br = "brew";
+      ssh-p = "ssh -oPreferredAuthentications=password -oPubkeyAuthentication=no";
     };
   };
 
@@ -100,6 +103,7 @@ in {
       tools = {
         bun = "latest";
         node = "22";
+        rust = "latest";
       };
       settings = {
         idiomatic_version_file_enable_tools = [];

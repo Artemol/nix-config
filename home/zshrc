@@ -1,7 +1,9 @@
 autoload -Uz compinit
 compinit
 
-. "$HOME/.local/bin/env"
+if [ -f "$HOME/.local/bin/env" ]; then
+    . "$HOME/.local/bin/env"
+fi
 
 export PATH="$PATH:/Applications/WezTerm.app/Contents/MacOS"
 export PATH="/Applications/MacVim.app/Contents/bin:$PATH"
