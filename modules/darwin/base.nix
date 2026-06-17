@@ -36,6 +36,11 @@
     };
   };
 
+  security.pam.services.sudo_local = {
+    touchIdAuth = true;
+    reattach = true;
+  };
+
   system.primaryUser = "toku163";
   system.stateVersion = 6;
 }

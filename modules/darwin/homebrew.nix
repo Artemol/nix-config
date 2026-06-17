@@ -20,18 +20,20 @@
       "docker"
       "docker-compose"
       "typst"
+      "llvm"
     ];
 
     casks = [
       "arc"
       "visual-studio-code"
       "1password"
+      "1password-cli"
       "raycast"
       "alt-tab"
       "chatgpt"
       "clipy"
       "dotnet-sdk"
-      "linear-linear"
+      "linear"
       "google-japanese-ime"
       "font-hackgen-nerd"
       "mactex"
@@ -50,6 +52,7 @@
       "codex-app"
       "google-drive"
       "cyberduck"
+      "zed"
     ];
   };
 }

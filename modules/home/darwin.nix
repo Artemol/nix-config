@@ -19,6 +19,7 @@
       nup = ''git -C "$NIXCFG" add -A && sudo darwin-rebuild switch --flake "$NIXCFG#$HM_HOST"'';
       nup-i = ''git -C "$NIXCFG" add -A && sudo darwin-rebuild switch --flake "$NIXCFG#$HM_HOST" --impure'';
       ncode = ''code "$NIXCFG"'';
+      nz = ''zed "$NIXCFG"'';
     };
     # zsh configuration files to be sourced
     initContent = builtins.readFile ../../home/zshrc;
