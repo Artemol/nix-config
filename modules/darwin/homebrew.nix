@@ -29,7 +29,6 @@
       "1password"
       "1password-cli"
       "raycast"
-      "alt-tab"
       "chatgpt"
       "clipy"
       "dotnet-sdk"
@@ -53,6 +52,7 @@
       "google-drive"
       "cyberduck"
       "zed"
+      "dockdoor"
     ];
   };
 }
