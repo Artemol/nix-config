@@ -1,12 +1,14 @@
-autoload -Uz compinit
-compinit
+# Manual zshrc start
 
 if [ -f "$HOME/.local/bin/env" ]; then
     . "$HOME/.local/bin/env"
 fi
 
-export PATH="$PATH:/Applications/WezTerm.app/Contents/MacOS"
-export PATH="/Applications/MacVim.app/Contents/bin:$PATH"
+# if runs on darwin, add some paths to PATH
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    export PATH="$PATH:/Applications/WezTerm.app/Contents/MacOS"
+    export PATH="/Applications/MacVim.app/Contents/bin:$PATH"
+fi
 
 function _fzf_cd_ghq() {
     FZF_DEFAULT_OPTS="${FZF_DEFAULT_OPTS} --reverse --height=50%"
@@ -23,9 +25,8 @@ bindkey "^g" _fzf_cd_ghq
 
 export HOMEBREW_NO_ENV_HINTS=1
 
-alias br="brew"
-
 eval "$(uv generate-shell-completion zsh)"
 
 export PATH="$PATH:$HOME/go/bin/"
 
+# Manual zshrc end

@@ -31,6 +31,7 @@ in {
     enableZshIntegration = true;
   };
 
+  # inject the WezTerm configuration file into the home directory
   home.file.".config/wezterm".source = ./wezterm;
 
   programs.vim = {
@@ -51,17 +52,27 @@ in {
 
   programs.zsh = {
     enable = true;
-    oh-my-zsh = {
-      enable = true;
-    };
     shellAliases = {
       ".." = "cd ..";
-      v = "vim";
-      nv = "nvim";
       cd = "z";
-      br = "brew";
-      ssh-p = "ssh -oPreferredAuthentications=password -oPubkeyAuthentication=no";
     };
+    zsh-abbr = {
+      enable = true;
+      abbreviations = {
+        ga = "git add";
+        gc = "git commit";
+        gpl = "git pull";
+        gps = "git push";
+        gst = "git status";
+        br = "brew";
+        v = "vim";
+        nv = "nvim";
+        ssh-p = "ssh -oPreferredAuthentications=password -oPubkeyAuthentication=no";
+      };
+    };
+    # zsh configuration files to be sourced
+    initContent = builtins.readFile ./zshrc;
+    envExtra = builtins.readFile ./zshenv;
   };
 
   programs.starship = {
@@ -87,28 +98,13 @@ in {
   programs.lazygit = {
     enable = true;
     settings = {
-      git.pagers.externalDiffCommand = "difft --color=always";
+      # git.pagers.externalDiffCommand = "difft --color=always";
     };
   };
 
   programs.zoxide = {
     enable = true;
     enableZshIntegration = true;
-  };
-
-  programs.mise = {
-    enable = true;
-    enableZshIntegration = true;
-    globalConfig = {
-      tools = {
-        bun = "latest";
-        node = "22";
-        rust = "latest";
-      };
-      settings = {
-        idiomatic_version_file_enable_tools = [];
-      };
-    };
   };
 
   programs.lsd = {

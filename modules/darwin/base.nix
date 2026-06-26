@@ -2,9 +2,14 @@
 # Darwin (macOS) system configuration for NixOS.
 #
 
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 {
+  nixpkgs.config.allowUnfreePredicate = pkg:
+    builtins.elem (lib.getName pkg) [
+      "zsh-abbr"
+    ];
+
   # User configuration
   users.users.toku163 = {
     home = "/Users/toku163";
