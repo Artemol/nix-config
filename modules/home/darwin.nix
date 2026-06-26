@@ -19,6 +19,7 @@
       nup = ''git -C "$NIXCFG" add -A && sudo darwin-rebuild switch --flake "$NIXCFG#${hostName}"'';
       nup-i = ''git -C "$NIXCFG" add -A && sudo darwin-rebuild switch --flake "$NIXCFG#${hostName}" --impure'';
       ncode = ''code "$NIXCFG"'';
+      nz = ''zed "$NIXCFG"'';
     };
   };
 
