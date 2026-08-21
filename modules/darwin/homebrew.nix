@@ -21,6 +21,7 @@
       "docker-compose"
       "typst"
       "llvm"
+      "herdr"
     ];
 
     casks = [
@@ -53,6 +54,7 @@
       "cyberduck"
       "zed"
       "dockdoor"
+      "obs"
     ];
   };
 }
