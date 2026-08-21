@@ -8,6 +8,7 @@ fi
 if [[ "$OSTYPE" == "darwin"* ]]; then
     export PATH="$PATH:/Applications/WezTerm.app/Contents/MacOS"
     export PATH="/Applications/MacVim.app/Contents/bin:$PATH"
+    export SSH_AUTH_SOCK=/Users/toku163/.bitwarden-ssh-agent.sock
 fi
 
 function _fzf_cd_ghq() {
@@ -28,5 +29,12 @@ export HOMEBREW_NO_ENV_HINTS=1
 eval "$(uv generate-shell-completion zsh)"
 
 export PATH="$PATH:$HOME/go/bin/"
+
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
 # Manual zshrc end

@@ -15,9 +15,14 @@
 
   # zsh alias for updating the configuration and applying changes with darwin-rebuild
   programs.zsh = {
+    profileExtra = ''
+      eval "$(/opt/homebrew/bin/brew shellenv)"
+      export PATH="$PATH:/Applications/Obsidian.app/Contents/MacOS"
+    '';
     shellAliases = {
       nup = ''git -C "$NIXCFG" add -A && sudo darwin-rebuild switch --flake "$NIXCFG#${hostName}"'';
       nup-i = ''git -C "$NIXCFG" add -A && sudo darwin-rebuild switch --flake "$NIXCFG#${hostName}" --impure'';
+      nfu = ''nix flake update nixpkgs-darwin home-manager-darwin nix-darwin --flake "$NIXCFG"'';
       ncode = ''code "$NIXCFG"'';
       nz = ''zed "$NIXCFG"'';
     };

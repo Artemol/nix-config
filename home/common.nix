@@ -68,6 +68,7 @@ in {
         v = "vim";
         nv = "nvim";
         ssh-p = "ssh -oPreferredAuthentications=password -oPubkeyAuthentication=no";
+        hr = "herdr --remote";
       };
     };
     # zsh configuration files to be sourced
@@ -119,7 +120,7 @@ in {
   programs.uv.enable = true;
 
   # 追加のパッケージがあればー
-  home.packages = with pkgs; [ 
-    curl tree wget htop ghq devenv
+  home.packages = with pkgs; [
+    curl tree wget htop ghq devenv nodejs
   ];
 }

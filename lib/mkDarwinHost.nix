@@ -17,6 +17,7 @@ nix-darwin.lib.darwinSystem {
     ++ [
       home-manager-darwin.darwinModules.home-manager
       {
+        home-manager.backupFileExtension = "backup";
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
         home-manager.extraSpecialArgs = {

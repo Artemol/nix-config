@@ -22,6 +22,8 @@
       "typst"
       "llvm"
       "herdr"
+      "nvm"
+      "bitwarden-cli"
     ];
 
     casks = [
@@ -48,7 +50,6 @@
       "notion"
       "microsoft-office"
       "microsoft-teams"
-      "scroll-reverser"
       "codex-app"
       "google-drive"
       "cyberduck"
