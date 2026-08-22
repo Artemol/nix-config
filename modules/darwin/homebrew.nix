@@ -10,20 +10,20 @@
 
     # automatic updates and upgrades when activating the configuration
     onActivation = {
-      autoUpdate = true;
-      upgrade = true;
+      autoUpdate = false;
+      upgrade = false;
+      extraFlags = [ "--verbose" ];
     };
 
     # brews and casks to be installed
     brews = [
       "colima"
       "docker"
+      "docker-buildx"
       "docker-compose"
       "typst"
-      "llvm"
+      "gdb"
       "herdr"
-      "nvm"
-      "bitwarden-cli"
     ];
 
     casks = [
@@ -31,6 +31,7 @@
       "visual-studio-code"
       "1password"
       "1password-cli"
+      "bitwarden"
       "raycast"
       "chatgpt"
       "clipy"
@@ -56,6 +57,9 @@
       "zed"
       "dockdoor"
       "obs"
+      "blender"
+      "gimp"
+      "zoom"
     ];
   };
 }

@@ -121,6 +121,23 @@ in {
 
   # 追加のパッケージがあればー
   home.packages = with pkgs; [
-    curl tree wget htop ghq devenv nodejs
+    curl
+    tree
+    wget
+    htop
+    btop
+    ghq
+    devenv
+    nodejs
+    bitwarden-cli
+    cloudflared
+    fd
+    ffmpeg
+    jujutsu
+    neovim
+    nmap
+    pandoc
+    poppler-utils
+    rsync
   ];
 }
