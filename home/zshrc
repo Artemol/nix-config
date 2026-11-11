@@ -4,13 +4,6 @@ if [ -f "$HOME/.local/bin/env" ]; then
     . "$HOME/.local/bin/env"
 fi
 
-# if runs on darwin, add some paths to PATH
-if [[ "$OSTYPE" == "darwin"* ]]; then
-    export PATH="$PATH:/Applications/WezTerm.app/Contents/MacOS"
-    export PATH="/Applications/MacVim.app/Contents/bin:$PATH"
-    export SSH_AUTH_SOCK=/Users/toku163/.bitwarden-ssh-agent.sock
-fi
-
 function _fzf_cd_ghq() {
     FZF_DEFAULT_OPTS="${FZF_DEFAULT_OPTS} --reverse --height=50%"
     local root="$(ghq root)"

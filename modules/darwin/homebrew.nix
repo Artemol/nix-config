@@ -60,6 +60,8 @@
       "blender"
       "gimp"
       "zoom"
+      "zen"
+      "adobe-acrobat-reader"
     ];
   };
 }
