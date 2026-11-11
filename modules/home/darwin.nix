@@ -24,8 +24,15 @@
     HOMEBREW_PREFIX = "/opt/homebrew";
     HOMEBREW_CELLAR = "/opt/homebrew/Cellar";
     HOMEBREW_REPOSITORY = "/opt/homebrew";
-    SSH_AUTH_SOCK = "${config.home.homeDirectory}/.bitwarden-ssh-agent.sock";
   };
+
+  # Use the Bitwarden agent locally, but keep the agent forwarded by sshd
+  # (ForwardAgent=yes) when logged in to this machine over SSH.
+  home.sessionVariablesExtra = ''
+    if [ -z "''${SSH_CONNECTION-}" ]; then
+      export SSH_AUTH_SOCK="${config.home.homeDirectory}/.bitwarden-ssh-agent.sock"
+    fi
+  '';
 
   programs.zsh = {
     # fpath is a shell variable, so set it in .zshrc before compinit (order 570).
